@@ -177,5 +177,9 @@ int main() {
     else
         cout << "Deu velha! (empate)" << endl;
 
+cout << endl << "Aperte Enter para sair...";
+    cin.ignore(1000, '\n');
+    cin.get();
+
     return 0;
 }
