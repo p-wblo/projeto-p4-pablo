@@ -39,7 +39,19 @@ O sistema deve produzir:
 - a jogada so e valida se for em uma casa vazia
 - vence quem completar uma linha de 3 dos seus respectivos simbolos
 - e empate quando todas as casas sao preenchindas e ninguem venceu
-- o adversario artificial deve sempre fazer a melhor jogada para nunca perder
+- o adversario artificial deve sempre fazer a melhor jogada, como definido na secao 5.1
+
+## 5.1 Definicao de melhor jogada
+
+A melhor jogada e escolhida supondo que o adversario tambem sempre joga da melhor forma possivel. Entre as jogadas validas, vale esta ordem de prioridade:
+
+1. vencer na hora: se existe uma jogada que completa uma linha, ela e escolhida
+2. garantir a vitoria: se existe uma jogada que leva a vitoria mesmo com o adversario jogando perfeito, ela e escolhida, preferindo a que vence em menos jogadas
+3. garantir pelo menos o empate: se nao da pra garantir a vitoria, escolhe uma jogada que nao deixa o adversario vencer. O bloqueio entra aqui: quando o adversario tem dois simbolos em uma linha e a terceira casa esta vazia, ocupar essa casa e a unica forma de nao perder
+4. adiar a derrota: se todas as jogadas levam a derrota, escolhe a que faz a derrota demorar mais
+5. desempate: se duas ou mais jogadas tem o mesmo resultado, vale a ordem fixa centro (5), cantos (1, 3, 7, 9) e lados (2, 4, 6, 8), ficando com a primeira dessa ordem
+
+Por isso, se for possivel vencer ou bloquear, vencer tem prioridade. E com o tabuleiro vazio todas as jogadas levam ao empate, entao a melhor jogada e o centro pelo desempate.
 
 ## 6. Casos de exemplo
 
@@ -80,14 +92,10 @@ que nao ha mais jogadas possiveis
 
 ## 10. Adequacao aos quatro paradigmas
 
-- imperativo: da pra resolver seguindo os passos e conferindo o
-tabuleiro aos poucos
-- orientado a objetos: da pra pensar o tabuleiro e o adversario como
-coisas que guardam informacao e fazem acoes
-- funcional: da pra calcular a melhor jogada testando as
-possibilidades repetidamente ate achar a melhor
-- logico: da pra escrever as regras do jogo e deixar o programa
-descobrir sozinho a jogada certa
+- imperativo: o tabuleiro vira um vetor de 9 casas alterado a cada jogada, as 8 linhas de vitoria sao conferidas com lacos, e a busca da melhor jogada pode marcar uma casa, avaliar e desmarcar no mesmo tabuleiro, usando estado mutavel de forma direta
+- orientado a objetos: o jogo tem entidades claras, um tabuleiro que protege as proprias casas e so aceita jogadas validas, jogadores humano e computador que escolhem jogadas de jeitos diferentes mas com a mesma interface, e uma partida que controla os turnos
+- funcional: cada jogada pode ser uma funcao que recebe um tabuleiro e devolve um tabuleiro novo sem alterar o anterior, a vitoria pode ser verificada aplicando uma funcao sobre as 8 linhas, e a busca da melhor jogada e recursiva por natureza
+- logico: as regras do jogo podem ser escritas como fatos e regras, por exemplo quais casas formam uma linha, o que e uma jogada valida e o que e vencer, e a melhor jogada pode ser uma consulta, deixando o backtracking do Prolog testar as jogadas possiveis
 
 ## 11. Linguagens inicialmente consideradas
 

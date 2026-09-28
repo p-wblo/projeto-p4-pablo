@@ -2,7 +2,7 @@
 
 ## Etapa 03 - Implementacao Imperativa
 
-A implementacao imperativa foi feita em C++ usando apenas o estilo procedural: vetores, variaveis, lacos, condicionais e funcoes, sem classes nem objetos. O codigo esta em `imperativo/jogo_da_velha.cpp`.
+A implementacao imperativa foi feita em C++ usando apenas o estilo procedural: vetores, variaveis, lacos, condicionais e funcoes, sem classes nem objetos. O codigo esta em `imperativo/jogodavelha.cpp`.
 
 **Estados mantidos** - O estado principal e o tabuleiro, um vetor de 9 caracteres (X, O ou espaco vazio), e a variavel `vez`, que guarda de quem e o turno. Tambem sao guardados o simbolo do jogador humano e o do computador.
 
